@@ -1,31 +1,22 @@
 import { StatusBar } from "expo-status-bar";
-import {
-    Image,
-    StyleSheet,
-    Text,
-    View,
-    ScrollView,
-    Dimensions,
-    TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
+import ImageComponent from "./components/ImageComponent";
 
 export default function App() {
-    const WINDOW_WIDTH = Dimensions.get("window").width;
-
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: "보기1", value: "1" },
-        { label: "보기2", value: "2" },
+        { label: "업로드순", value: "1" },
+        { label: "인기순", value: "2" },
     ]);
 
-    console.log("gunheeLog");
+    let data = Array(7).fill("사진");
 
     return (
         <View style={styles.container}>
@@ -65,54 +56,9 @@ export default function App() {
                         </View>
                     </View>
                     <View style={styles.imageAll}>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
-                        <View style={stylesImage(WINDOW_WIDTH).imageBox}>
-                            <Image
-                                source={require("./assets/images/리트리버.png")}
-                                style={styles.image}
-                            />
-                        </View>
+                        {data.map((e, i) => (
+                            <ImageComponent key={i} data={e} index={i + 1} />
+                        ))}
                     </View>
                 </ScrollView>
             </View>
@@ -171,21 +117,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         width: "100%",
-    },
-
-    image: {
-        width: "100%",
-        height: "100%",
-        // minHeight: "190px",
-        // minWidth: "190px",
+        position: "relative",
+        zIndex: -1,
     },
 });
-
-const stylesImage = (width) =>
-    StyleSheet.create({
-        imageBox: {
-            padding: 1,
-            width: "50%",
-            height: width / 2,
-        },
-    });

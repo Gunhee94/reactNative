@@ -2,15 +2,14 @@ import { View, Image, StyleSheet, Dimensions } from "react-native";
 
 export default function ImageComponent(props) {
     const WINDOW_WIDTH = Dimensions.get("window").width;
-
     return (
         <View style={stylesImage(WINDOW_WIDTH).imageBox}>
             <Image
-                source={require("../assets/images/" + props.data + props.index + ".png")}
+                source={require("./../assets/images/사진"+3+".png")}
                 style={styles.image}
             />
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
